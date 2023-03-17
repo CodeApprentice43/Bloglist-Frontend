@@ -16,7 +16,7 @@ useImperativeHandle(refs,()=>{
 })
     return (
         <div>
-            <div style={{display:visibility? 'none':''}}>
+            <div style={{display:visibility? 'none':''} }>
                 <button onClick={toggleVisibility}>{props.label}</button>
             </div>
         

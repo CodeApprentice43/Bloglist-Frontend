@@ -3,7 +3,7 @@ import { useState } from "react"
 const Blog = ({blog,handeLike,handleDelete,user}) => {
 
   const [viewWholeBlog,toggleWhole] = useState(false) 
-  const label = viewWholeBlog? 'hide':'view'
+
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -13,27 +13,32 @@ const Blog = ({blog,handeLike,handleDelete,user}) => {
   }
 
   return (
-    <div style={blogStyle}>
+    
+    <div style={blogStyle} className = "default-view">
       
-      <h2>{blog.title}</h2>  <button onClick={()=>toggleWhole(!viewWholeBlog)}>{label}</button>
+      <h2>{blog.title}</h2>  
+      <button onClick={()=>toggleWhole(!viewWholeBlog)}>view</button>
       <br></br>
+      <strong>author:</strong> {blog.author}
+        <br></br>
     
      
 
-      <div style={{display:viewWholeBlog?'':'none'}}>
+      {viewWholeBlog && <div  className = "toggle-view">
 
        <strong>url:</strong>{blog.url}
         <br></br>
         <strong>likes:</strong>{blog.likes}   <button onClick={handeLike}>like</button>
         <br></br>
-        <strong>author:</strong> {blog.author}
-        <br></br>
+        </div>
+}
 
        {user.name === blog.author && <button onClick={handleDelete}>remove</button> }
-      </div>
-      <br></br>
+  
 
-    </div>
+      
+      </div>
+  
   )
 }
 

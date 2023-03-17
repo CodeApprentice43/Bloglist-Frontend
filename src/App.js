@@ -5,6 +5,7 @@ import blogService from './services/blogs'
 import loginServices from './services/login'
 import Togglable from './components/Togglable'
 import BlogForm from './components/BlogForm'
+import Notification from './components/Notification'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -15,40 +16,21 @@ const App = () => {
 
   
   
-  const Notification=({message})=>
-  {
-    if(message===''){return null}
 
-    if(message.includes('Wrong')|| message.includes('ERROR')){
-    return (
-      <div className='error'>
-        {message}
-      </div>
-    )
-    }
-    else{
-      return (
-        <div className='add'>
-          {message}
-        </div>
-      )
-    }
-  }
   const blogFormref = useRef()
   
   const handleLogin = async event =>{
-
     event.preventDefault()
-
+  
     try{
-    const user = await loginServices.login({username,password})
-    window.localStorage.setItem(
-      'loggedUser',JSON.stringify(user)
-    )
-    setUser(user)
-    blogService.setToken(user.token)
-    setUsername('')
-    setPassword('')
+      const user = await loginServices.login({username,password})
+      window.localStorage.setItem(
+        'loggedUser',JSON.stringify(user)
+      )
+      setUser(user)
+      blogService.setToken(user.token)
+      setUsername('')
+      setPassword('')
     }
     catch(exception)
     {
@@ -59,8 +41,8 @@ const App = () => {
         setMessage('')
       }, 3000);
     }
-
   }
+  
 
   const handleLogout = (event) => {
     event.preventDefault()
@@ -177,5 +159,6 @@ const App = () => {
   </div>
 )  
 }
+
 
 export default App
